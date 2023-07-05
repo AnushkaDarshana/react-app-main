@@ -1,0 +1,30 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  margin: 0 auto;
+  }
+  .form-section {
+    margin-bottom: 20px; /* Add margin bottom for spacing between sections */
+  }
+  
+  .form-label {
+    margin-bottom: 10px;
+    font-size: 16px; /* Increase font size for the labels */
+  }
+  
+  .form-input {
+    margin-left: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 12px; /* Increase font size for the inputs */
+  }
+
+.submit-button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
