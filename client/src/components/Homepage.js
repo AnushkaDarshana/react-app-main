@@ -80,11 +80,13 @@ const Homepage = () => {
       <form onSubmit={editId ? handleUpdate : handleCreate} className="form-section">
         <label className="form-label">
           Title:
-          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="form-input" required />
+          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} 
+          className="form-input-notes" required />
         </label>
         <label className="form-label">
           Description:
-          <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="description-input" required />
+          <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} 
+          className="description-input" required />
         </label>
         <button type="submit" className="submit-button">
           {editId ? 'Update' : 'Create'}

@@ -52,9 +52,6 @@ const LoginForm = () => {
     </p>
   </form>
 </div>
-
-
-
   );
 };
 

@@ -20,9 +20,9 @@ function RegistrationForm() {
       .catch((error) => {
         console.error('Error:', error);
         toast.error('Username Already Exists', {
-          position: toast.POSITION.TOP_CENTER, // Display the toast in the middle of the screen
-          autoClose: 1500, // Close the toast after 1.5 seconds
-          hideProgressBar: true, // Hide the progress bar
+          position: toast.POSITION.TOP_CENTER, 
+          autoClose: 1500, 
+          hideProgressBar: true, 
         });
       });
   };
