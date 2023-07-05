@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Button, TextField, Table, TableContainer, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -44,7 +43,7 @@ const Homepage = () => {
   };
 
   const handleEdit = (id) => {
-    const itemToEdit = data.find(item => item.id === id);
+    const itemToEdit = data.find((item) => item.id === id);
     if (itemToEdit) {
       setTitle(itemToEdit.title);
       setDescription(itemToEdit.description);
@@ -76,54 +75,48 @@ const Homepage = () => {
   };
 
   return (
-    <div>
-      <h1>Homepage</h1>
-      <form onSubmit={editId ? handleUpdate : handleCreate}>
-        <TextField
-          label="Title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <TextField
-          label="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-        <Button type="submit" variant="contained" color="primary">
+    <div className="homepage-container">
+      <h1 className="page-title">Manage Your Notes</h1>
+      <form onSubmit={editId ? handleUpdate : handleCreate} className="form-section">
+        <label className="form-label">
+          Title:
+          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} className="form-input" required />
+        </label>
+        <label className="form-label">
+          Description:
+          <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} className="description-input" required />
+        </label>
+        <button type="submit" className="submit-button">
           {editId ? 'Update' : 'Create'}
-        </Button>
+        </button>
       </form>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell>Title</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell>Action</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {data.map((item) => (
-              <TableRow key={item.id}>
-                <TableCell>{item.id}</TableCell>
-                <TableCell>{item.title}</TableCell>
-                <TableCell>{item.description}</TableCell>
-                <TableCell>
-                  <Button variant="contained" color="primary" onClick={() => handleEdit(item.id)}>
-                    Edit
-                  </Button>
-                  <Button variant="contained" color="secondary" onClick={() => handleDelete(item.id)}>
-                    Delete
-                  </Button>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <table className="table-container">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((item) => (
+            <tr key={item.id}>
+              <td>{item.id}</td>
+              <td>{item.title}</td>
+              <td>{item.description}</td>
+              <td>
+                <button onClick={() => handleEdit(item.id)} className="action-button-edit">
+                  Edit
+                </button>
+                <button onClick={() => handleDelete(item.id)} className="action-button-delete">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
