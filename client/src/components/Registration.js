@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import styles from './RegisterForm.module.css';
 
 function RegistrationForm() {
   const [username, setUsername] = useState('');
@@ -26,17 +27,17 @@ function RegistrationForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Username:
-        <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
-      </label>
-      <label>
-        Password:
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-      </label>
-      <input type="submit" value="Submit" />
-    </form>
+    <form onSubmit={handleSubmit} className={styles['register-form']}>
+  <label className={styles['form-label']}>
+    Username:
+    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} className={styles['form-input']} />
+  </label>
+  <label className={styles['form-label']}>
+    Password:
+    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className={styles['form-input']} />
+  </label>
+  <input type="submit" value="Submit" className={styles['submit-button']} />
+</form>
   );
 }
 
