@@ -11,8 +11,9 @@ function RegistrationForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
-    axios.post('http://localhost:8080/routes/register', { username, password })
+
+    axios
+      .post('http://localhost:8080/routes/register', { username, password })
       .then((response) => {
         navigate('/login');
       })
