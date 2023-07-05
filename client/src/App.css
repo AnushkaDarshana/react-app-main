@@ -14,14 +14,14 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: white;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  /* color: white; */
 }
 
 .App-link {
@@ -36,3 +36,70 @@
     transform: rotate(360deg);
   }
 }
+
+body{
+  color:black;
+  }
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: 0 auto;
+    }
+    .form-section {
+      margin-bottom: 20px; /* Add margin bottom for spacing between sections */
+    }
+    
+    .form-label {
+      margin-bottom: 10px;
+      font-size: 16px; /* Increase font size for the labels */
+    }
+    
+    .form-input {
+      margin-left: 10px;
+      padding: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 12px; /* Increase font size for the inputs */
+    }
+  
+  .submit-button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .form-image-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-image {
+    width: 200px; /* Adjust the width as per your design */
+    height: auto; /* Adjust the height as per your design */
+  }
+  
+  .background-container {
+    background-color: #ecebeb;
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    border-radius: 10px;
+    box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.2); 
+  }
+
+  .register-form {
+    display: flex;
+    flex-direction: column;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .form-link{
+    font-size: 14px;
+  }
