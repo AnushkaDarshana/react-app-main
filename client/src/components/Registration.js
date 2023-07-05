@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 function RegistrationForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
   
     axios.post('http://localhost:8080/users/register', { username, password })
       .then((response) => {
-        console.log('Success:', response.data);
+        navigate('/login');
       })
       .catch((error) => {
         console.error('Error:', error);
