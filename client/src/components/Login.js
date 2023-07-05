@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import styles from './LoginForm.module.css';
+import loginImage from '../images/login.png';
 
 const LoginForm = () => {
   const [username, setUsername] = useState('');
@@ -33,17 +33,27 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles['login-form']}>
-    <label className={styles['form-label']}>
-      Username:
-      <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} className={styles['form-input']}  />
+<div className='background-container'>
+  <form onSubmit={handleSubmit} className='login-form'>
+    <div className='form-image-container'>
+      <img src={loginImage} alt="Login Image" className='form-image' />
+    </div>
+    <label className='form-label'>
+      Email:
+      <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} className='form-input' />
     </label>
-    <label className={styles['form-label']}>
+    <label className='form-label'>
       Password:
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className={styles['form-input']}  />
+      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className='form-input' />
     </label>
-    <input type="submit" value="Login" className={styles['submit-button']} />
+    <input type="submit" value="Login" className='submit-button' />
+    <p className='form-link'>
+      Create new account? <a href="/">Register</a>
+    </p>
   </form>
+</div>
+
+
 
   );
 };

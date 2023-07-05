@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import styles from './RegisterForm.module.css';
+import registerImage from '../images/register.png';
 
 function RegistrationForm() {
   const [username, setUsername] = useState('');
@@ -20,24 +20,33 @@ function RegistrationForm() {
         console.error('Error:', error);
         toast.error('Username Already Exists', {
           position: toast.POSITION.TOP_CENTER, // Display the toast in the middle of the screen
-          autoClose: 3000, // Close the toast after 3 seconds
+          autoClose: 1500, // Close the toast after 1.5 seconds
           hideProgressBar: true, // Hide the progress bar
         });
       });
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles['register-form']}>
-  <label className={styles['form-label']}>
-    Username:
-    <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} className={styles['form-input']} />
-  </label>
-  <label className={styles['form-label']}>
-    Password:
-    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className={styles['form-input']} />
-  </label>
-  <input type="submit" value="Submit" className={styles['submit-button']} />
-</form>
+<div className='background-container'>
+  <form onSubmit={handleSubmit} className='register-form'>
+    <div className='form-image-container'>
+      <img src={registerImage} alt="Login Image" className='form-image' />
+    </div>
+    <label className='form-label'>
+      Email:
+      <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} className='form-input' />
+    </label>
+    <label className='form-label'>
+      Password:
+      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className='form-input' />
+    </label>
+    <input type="submit" value="Register" className='submit-button' />
+    <p className='form-link'>
+      Already have an account? <a href="./login">Login</a>
+    </p>
+  </form>
+</div>
+
   );
 }
 
