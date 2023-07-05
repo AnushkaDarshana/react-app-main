@@ -12,7 +12,7 @@ const LoginForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:8080/users/login', { username, password });
+      const response = await axios.post('http://localhost:8080/routes/login', { username, password });
       const token = response.data.token;
       // Save token to local storage
       localStorage.setItem('Token', token);

@@ -3,19 +3,19 @@ import { Button, TextField, Table, TableContainer, TableHead, TableRow, TableCel
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-
 const Homepage = () => {
   const [data, setData] = useState([]);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [editId, setEditId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('Token');
     if (!token) {
-        navigate('/login');
-        console.error('User not logged in');
-        return;
+      navigate('/login');
+      console.error('User not logged in');
+      return;
     }
 
     fetchData();
@@ -23,16 +23,17 @@ const Homepage = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/tutorials');
+      const response = await axios.get('http://localhost:8080/routes/get');
       setData(response.data);
     } catch (error) {
       console.error('Error:', error);
     }
   };
 
-  const handleCreate = async () => {
+  const handleCreate = async (e) => {
+    e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/api/tutorials', { title, description });
+      const response = await axios.post('http://localhost:8080/routes/create', { title, description });
       console.log('Success:', response.data);
       fetchData();
       setTitle('');
@@ -42,9 +43,31 @@ const Homepage = () => {
     }
   };
 
+  const handleEdit = (id) => {
+    const itemToEdit = data.find(item => item.id === id);
+    if (itemToEdit) {
+      setTitle(itemToEdit.title);
+      setDescription(itemToEdit.description);
+      setEditId(id);
+    }
+  };
+
+  const handleUpdate = async () => {
+    try {
+      const response = await axios.put(`http://localhost:8080/routes/update/${editId}`, { title, description });
+      console.log('Success:', response.data);
+      fetchData();
+      setTitle('');
+      setDescription('');
+      setEditId(null);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:8080/api/tutorials/${id}`);
+      const response = await axios.delete(`http://localhost:8080/routes/delete/${id}`);
       console.log('Success:', response.data);
       fetchData();
     } catch (error) {
@@ -55,7 +78,7 @@ const Homepage = () => {
   return (
     <div>
       <h1>Homepage</h1>
-      <form onSubmit={handleCreate}>
+      <form onSubmit={editId ? handleUpdate : handleCreate}>
         <TextField
           label="Title"
           value={title}
@@ -68,7 +91,9 @@ const Homepage = () => {
           onChange={(e) => setDescription(e.target.value)}
           required
         />
-        <Button type="submit" variant="contained" color="primary">Create</Button>
+        <Button type="submit" variant="contained" color="primary">
+          {editId ? 'Update' : 'Create'}
+        </Button>
       </form>
       <TableContainer component={Paper}>
         <Table>
@@ -87,7 +112,12 @@ const Homepage = () => {
                 <TableCell>{item.title}</TableCell>
                 <TableCell>{item.description}</TableCell>
                 <TableCell>
-                  <Button variant="contained" color="secondary" onClick={() => handleDelete(item.id)}>Delete</Button>
+                  <Button variant="contained" color="primary" onClick={() => handleEdit(item.id)}>
+                    Edit
+                  </Button>
+                  <Button variant="contained" color="secondary" onClick={() => handleDelete(item.id)}>
+                    Delete
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}

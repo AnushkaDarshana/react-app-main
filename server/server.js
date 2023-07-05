@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const userRoutes = require("./routes/userRoutes.js");
+const Routes = require("./routes/Routes.js");
+
 
 const app = express();
 
@@ -19,7 +20,7 @@ app.get("/", (req, res) => {
 });
 
 // API routes
-app.use("/users", userRoutes);
+app.use("/routes", Routes);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
