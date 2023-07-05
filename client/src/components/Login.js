@@ -34,17 +34,28 @@ const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className={styles['login-form']}>
-    <label className={styles['form-label']}>
-      Username:
-      <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} className={styles['form-input']}  />
-    </label>
-    <label className={styles['form-label']}>
-      Password:
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className={styles['form-input']}  />
-    </label>
-    <input type="submit" value="Login" className={styles['submit-button']} />
-  </form>
-
+      <label className={styles['form-label']}>
+        Username:
+        <input
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className={styles['form-input']}
+          autoComplete="off" // Disable autofill
+        />
+      </label>
+      <label className={styles['form-label']}>
+        Password:
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className={styles['form-input']}
+          autoComplete="off" // Disable autofill
+        />
+      </label>
+      <input type="submit" value="Login" className={styles['submit-button']} />
+    </form>
   );
 };
 
