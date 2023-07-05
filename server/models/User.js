@@ -8,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
       autoIncrement: true
     },
     username: DataTypes.STRING,
-    password: DataTypes.TEXT,
     passwordHash: DataTypes.TEXT // Added column for storing hashed password
   }, {
     tableName: 'user',

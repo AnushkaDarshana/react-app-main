@@ -18,7 +18,6 @@ exports.register = async (req, res) => {
 
     const user = await User.create({
       username: username,
-      password: password,
       passwordHash: passwordHash // Store the hashed password
     });
 
