@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css'; // Import the styles for the date picker
-
 
 const Reports = () => {
   const [data, setData] = useState([]);
@@ -92,8 +90,6 @@ const Reports = () => {
             dateFormat="yyyy-MM-dd"
             className="date-picker-input"
           />
-        </div>
-        <div className="date-picker-container">
           <div className="date-picker-label">End Date:</div>
           <DatePicker
             selected={endDate}

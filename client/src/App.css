@@ -222,3 +222,20 @@ body{
     text-decoration: none;
   }
   
+  .date-picker-container {
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+  }
+  
+  .date-picker-label {
+    margin: 10px;
+  }
+  
+  .date-picker-input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 10px;
+  }
+  
