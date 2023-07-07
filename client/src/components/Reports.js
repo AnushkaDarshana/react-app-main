@@ -110,7 +110,7 @@ const Reports = () => {
       <table className="table-container">
         <thead>
           <tr>
-            <th>ID</th>
+            <th>Date</th>
             <th>Title</th>
             <th>Description</th>
             <th>Action</th>
