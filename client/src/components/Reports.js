@@ -3,13 +3,14 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
 
 
 const Reports = () => {
     const [data, setData] = useState([]);
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
-    const [editId, setEditId] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -32,124 +33,88 @@ const Reports = () => {
         }
     };
 
-    const handleCreate = async(e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('http://localhost:8080/routes/create', { title, description });
-            console.log('Success:', response.data);
-            fetchData();
-            setTitle('');
-            setDescription('');
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };
-
-    const handleEdit = (id) => {
-        const itemToEdit = data.find((item) => item.id === id);
-        if (itemToEdit) {
-            setTitle(itemToEdit.title);
-            setDescription(itemToEdit.description);
-            setEditId(id);
-        }
-    };
-
-    const handleUpdate = async() => {
-        try {
-            const response = await axios.put(`http://localhost:8080/routes/update/${editId}`, { title, description });
-            console.log('Success:', response.data);
-            fetchData();
-            setTitle('');
-            setDescription('');
-            setEditId(null);
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };
-
-    const handleDelete = async(id) => {
-        try {
-            const response = await axios.delete(`http://localhost:8080/routes/delete/${id}`);
-            console.log('Success:', response.data);
-            fetchData();
-        } catch (error) {
-            console.error('Error:', error);
-        }
-    };
-
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
+    const filteredData = data.filter(item => {
+      const itemDate = new Date(item.date);
+      if (startDate && endDate) {
+        let endOfDay = new Date(endDate);
+        endOfDay.setHours(23,59,59,999);
+        return itemDate >= startDate && itemDate <= endOfDay;
+      }
+      return true;
+    });
+    const printDocument = () => {
+      const filteredData = data.filter(item => {
+        const itemDate = new Date(item.date);
+        if (startDate && endDate) {
+          return itemDate >= startDate && itemDate <= endDate;
+        }
+        return true;
+      });
+  
+      if (filteredData.length === 0) {
+          alert('Table is empty!');
+      } else {
+          const input = document.getElementById('divToPrint');
+          html2canvas(input)
+              .then((canvas) => {
+                  const imgData = canvas.toDataURL('image/png');
+                  const pdf = new jsPDF();
+                  pdf.addImage(imgData, 'JPEG', 0, 0);
+                  pdf.save("download.pdf");
+              });
+      }
+  }
 
-    return ( <
-        div className = "homepage-container" >
-        <
-        h1 className = "page-title" > Generate Reports < /h1> <
-        form onSubmit = { editId ? handleUpdate : handleCreate }
-        className = "form-section" >
-        <
-        div className = "date-picker-container" >
-        <
-        div className = "date-picker-label" > Start Date: < /div> <
-        DatePicker selected = { startDate }
-        onChange = {
-            (date) => setStartDate(date) }
-        dateFormat = "yyyy-MM-dd"
-        className = "date-picker-input" /
-        >
-        <
-        div className = "date-picker-label" > End Date: < /div> <
-        DatePicker selected = { endDate }
-        onChange = {
-            (date) => setEndDate(date) }
-        dateFormat = "yyyy-MM-dd"
-        className = "date-picker-input" /
-        >
-        <
-        /div>
+  return (
+    <div className="homepage-container">
+      <h1 className="page-title">Generate Reports</h1>
+      <form onSubmit="" className="form-section">
+        <div className="date-picker-container">
+          <div className="date-picker-label">Start Date:</div>
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            dateFormat="yyyy-MM-dd"
+            className="date-picker-input"
+          />
+          <div className="date-picker-label">End Date:</div>
+          <DatePicker
+            selected={endDate}
+            onChange={(date) => setEndDate(date)}
+            minDate={startDate}
+            dateFormat="yyyy-MM-dd"
+            className="date-picker-input"
+          />
+        </div>
+      </form>
+      <div id="divToPrint">
+        <table className="table-container">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Title</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredData.map((item) => (
+              <tr key={item.id}>
+                <td>{item.date}</td>
+                <td>{item.title}</td>
+                <td>{item.description}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <div className="button-container">
+        <a href="./homepage" className="back-button">Go Back</a>
+        <button className="back-button" onClick={printDocument}>Print</button>
+    </div>
 
-        <
-        button type = "submit"
-        className = "submit-button" >
-        Filter Records <
-        /button> <
-        /form>
-
-        <
-        table className = "table-container" >
-        <
-        thead >
-        <
-        tr >
-        <
-        th > Date < /th> <
-        th > Title < /th> <
-        th > Description < /th> <
-        /tr> <
-        /thead> <
-        tbody > {
-            data.map((item) => ( <
-                tr key = { item.id } >
-                <
-                td > { item.id } < /td> <
-                td > { item.title } < /td> <
-                td > { item.description } < /td>
-
-                <
-                /tr>
-            ))
-        } <
-        /tbody> <
-        /table> <
-        div className = "button-container" >
-        <
-        a href = "./homepage"
-        className = "back-button" > Go Back < /a> <
-        a href = "#"
-        className = "print-button" > Print Report < /a> <
-        /div>
-
-        <
-        /div>
+        </div>
     );
 };
 

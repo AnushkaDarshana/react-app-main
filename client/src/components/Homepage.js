@@ -74,85 +74,58 @@ const Homepage = () => {
         }
     };
 
-    return ( <
-        div className = "homepage-container" >
-        <
-        h1 className = "page-title" > Manage Your Notes < /h1> <
-        form onSubmit = { editId ? handleUpdate : handleCreate }
-        className = "form-section" >
-        <
-        label className = "form-label" >
-        Title:
-        <
-        input type = "text"
-        value = { title }
-        onChange = {
-            (e) => setTitle(e.target.value) }
-        className = "form-input-notes"
-        required / >
-        <
-        /label> <
-        label className = "form-label" >
-        Description:
-        <
-        input type = "text"
-        value = { description }
-        onChange = {
-            (e) => setDescription(e.target.value) }
-        className = "description-input"
-        required / >
-        <
-        /label> <
-        button type = "submit"
-        className = "submit-button" > { editId ? 'Update' : 'Create' } <
-        /button> <
-        /form> <
-        table className = "table-container" >
-        <
-        thead >
-        <
-        tr >
-        <
-        th > Date < /th> <
-        th > Title < /th> <
-        th > Description < /th> <
-        th > Action < /th> <
-        /tr> <
-        /thead> <
-        tbody > {
-            data.map((item) => ( <
-                tr key = { item.id } >
-                <
-                td > { item.id } < /td> <
-                td > { item.title } < /td> <
-                td > { item.description } < /td> <
-                td >
-                <
-                button onClick = {
-                    () => handleEdit(item.id) }
-                className = "action-button-edit" >
-                Edit <
-                /button> <
-                button onClick = {
-                    () => handleDelete(item.id) }
-                className = "action-button-delete" >
-                Delete <
-                /button> <
-                /td> <
-                /tr>
-            ))
-        } <
-        /tbody> <
-        /table> <
-        div className = "reports-container" >
-        <
-        a href = "./reports"
-        className = "reports-button" >
-        Generate Reports <
-        /a> <
-        /div> <
-        /div>
-    );
+  return (
+    <div className="homepage-container">
+      <h1 className="page-title">Manage Your Notes</h1>
+      <form onSubmit={editId ? handleUpdate : handleCreate} className="form-section">
+        <label className="form-label">
+          Title:
+          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} 
+          className="form-input-notes" required />
+        </label>
+        <label className="form-label">
+          Description:
+          <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} 
+          className="description-input" required />
+        </label>
+        <button type="submit" className="submit-button">
+          {editId ? 'Update' : 'Create'}
+        </button>
+      </form>
+      <table className="table-container">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map((item) => (
+            <tr key={item.id}>
+              <td>{item.date}</td>
+              <td>{item.title}</td>
+              <td>{item.description}</td>
+              <td>
+                <button onClick={() => handleEdit(item.id)} className="action-button-edit">
+                  Edit
+                </button>
+                <button onClick={() => handleDelete(item.id)} className="action-button-delete">
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div className="reports-container">
+      <a href="./reports" className="reports-button">
+        Generate Reports
+    </a>
+    </div>
+    </div>
+  );
 };
 
 export default Homepage;
