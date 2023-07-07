@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css'; // Import the styles for the date picker
 
-const Homepage = () => {
+
+const Reports = () => {
   const [data, setData] = useState([]);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -74,24 +77,36 @@ const Homepage = () => {
     }
   };
 
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+
   return (
     <div className="homepage-container">
-      <h1 className="page-title">Manage Your Notes</h1>
+      <h1 className="page-title">Generate Reports</h1>
       <form onSubmit={editId ? handleUpdate : handleCreate} className="form-section">
-        <label className="form-label">
-          Title:
-          <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} 
-          className="form-input-notes" required />
-        </label>
-        <label className="form-label">
-          Description:
-          <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} 
-          className="description-input" required />
-        </label>
+        <div className="date-picker-container">
+          <div className="date-picker-label">Start Date:</div>
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            dateFormat="yyyy-MM-dd"
+            className="date-picker-input"
+          />
+        </div>
+        <div className="date-picker-container">
+          <div className="date-picker-label">End Date:</div>
+          <DatePicker
+            selected={endDate}
+            onChange={(date) => setEndDate(date)}
+            dateFormat="yyyy-MM-dd"
+            className="date-picker-input"
+          />
+        </div>
         <button type="submit" className="submit-button">
-          {editId ? 'Update' : 'Create'}
+          Filter Records
         </button>
       </form>
+
       <table className="table-container">
         <thead>
           <tr>
@@ -119,11 +134,9 @@ const Homepage = () => {
           ))}
         </tbody>
       </table>
-      <a href="./reports" className="reports-button">
-        Generate Reports
-    </a>
+
     </div>
   );
 };
 
-export default Homepage;
+export default Reports;
