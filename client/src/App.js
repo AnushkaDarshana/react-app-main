@@ -9,21 +9,34 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
 function App() {
-  return (
-    <Router>
-      <div className="App">
-        <header className="App-header">
-          <ToastContainer />
-          <Routes>
-            <Route path="/" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/homepage" element={<Homepage />} />
-            <Route path="/reports" element={<Reports />} />
-          </Routes>
-        </header>
-      </div>
-    </Router>
-  );
+    return ( <
+        Router >
+        <
+        div className = "App" >
+        <
+        header className = "App-header" >
+        <
+        ToastContainer / >
+        <
+        Routes >
+        <
+        Route path = "/"
+        element = { < Login / > }
+        /> <
+        Route path = "/register"
+        element = { < Register / > }
+        /> <
+        Route path = "/homepage"
+        element = { < Homepage / > }
+        /> <
+        Route path = "/reports"
+        element = { < Reports / > }
+        /> <
+        /Routes> <
+        /header> <
+        /div> <
+        /Router>
+    );
 }
 
 export default App;
