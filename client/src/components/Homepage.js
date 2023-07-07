@@ -119,9 +119,11 @@ const Homepage = () => {
           ))}
         </tbody>
       </table>
+      <div className="reports-container">
       <a href="./reports" className="reports-button">
         Generate Reports
     </a>
+    </div>
     </div>
   );
 };
