@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 const Reports = () => {
     const [data, setData] = useState([]);
@@ -103,7 +105,9 @@ const Reports = () => {
         className = "date-picker-input" /
         >
         <
-        /div> <
+        /div>
+
+        <
         button type = "submit"
         className = "submit-button" >
         Filter Records <
@@ -120,34 +124,29 @@ const Reports = () => {
         th > Date < /th> <
         th > Title < /th> <
         th > Description < /th> <
-        th > Action < /th> <
         /tr> <
         /thead> <
         tbody > {
             data.map((item) => ( <
                 tr key = { item.id } >
                 <
-                td > { item.date } < /td> <
+                td > { item.id } < /td> <
                 td > { item.title } < /td> <
-                td > { item.description } < /td> <
-                td >
+                td > { item.description } < /td>
+
                 <
-                button onClick = {
-                    () => handleEdit(item.id) }
-                className = "action-button-edit" >
-                Edit <
-                /button> <
-                button onClick = {
-                    () => handleDelete(item.id) }
-                className = "action-button-delete" >
-                Delete <
-                /button> <
-                /td> <
                 /tr>
             ))
         } <
         /tbody> <
-        /table>
+        /table> <
+        div className = "button-container" >
+        <
+        a href = "./homepage"
+        className = "back-button" > Go Back < /a> <
+        a href = "#"
+        className = "print-button" > Print Report < /a> <
+        /div>
 
         <
         /div>

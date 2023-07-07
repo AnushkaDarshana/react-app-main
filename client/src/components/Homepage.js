@@ -87,8 +87,7 @@ const Homepage = () => {
         input type = "text"
         value = { title }
         onChange = {
-            (e) => setTitle(e.target.value)
-        }
+            (e) => setTitle(e.target.value) }
         className = "form-input-notes"
         required / >
         <
@@ -99,16 +98,15 @@ const Homepage = () => {
         input type = "text"
         value = { description }
         onChange = {
-            (e) => setDescription(e.target.value)
-        }
+            (e) => setDescription(e.target.value) }
         className = "description-input"
         required / >
         <
         /label> <
         button type = "submit"
         className = "submit-button" > { editId ? 'Update' : 'Create' } <
-        /button> < /
-        form > <
+        /button> <
+        /form> <
         table className = "table-container" >
         <
         thead >
@@ -118,41 +116,42 @@ const Homepage = () => {
         th > Date < /th> <
         th > Title < /th> <
         th > Description < /th> <
-        th > Action < /th> < /
-        tr > <
+        th > Action < /th> <
+        /tr> <
         /thead> <
         tbody > {
             data.map((item) => ( <
                 tr key = { item.id } >
                 <
-                td > { item.date } < /td> <
+                td > { item.id } < /td> <
                 td > { item.title } < /td> <
                 td > { item.description } < /td> <
                 td >
                 <
                 button onClick = {
-                    () => handleEdit(item.id)
-                }
+                    () => handleEdit(item.id) }
                 className = "action-button-edit" >
                 Edit <
                 /button> <
                 button onClick = {
-                    () => handleDelete(item.id)
-                }
+                    () => handleDelete(item.id) }
                 className = "action-button-delete" >
                 Delete <
-                /button> < /
-                td > <
+                /button> <
+                /td> <
                 /tr>
             ))
         } <
-        /tbody> < /
-        table > <
+        /tbody> <
+        /table> <
+        div className = "reports-container" >
+        <
         a href = "./reports"
         className = "reports-button" >
         Generate Reports <
-        /a> < /
-        div >
+        /a> <
+        /div> <
+        /div>
     );
 };
 

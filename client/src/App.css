@@ -164,6 +164,10 @@ body{
     border: none;
     cursor: pointer;
   }
+
+  .submit-button:hover {
+    background-color: #5dc760;
+  }
   
   .table-container {
     width: 100%;
@@ -205,6 +209,9 @@ body{
     margin-right: 0;
   }
   
+  .reports-container{
+    margin-bottom: 50px;
+  }
 
   .reports-button {
     margin-top: 20px;
@@ -215,6 +222,7 @@ body{
     cursor: pointer;
     font-size: 16px;
     text-decoration: none;
+    
   }
   
   .reports-button:hover {
@@ -225,17 +233,49 @@ body{
   .date-picker-container {
     display: flex;
     align-items: center;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
+    
   }
   
   .date-picker-label {
-    margin: 10px;
+    margin: 20px;
+    font-size: 16px;
   }
   
   .date-picker-input {
     padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 10px;
+    font-size: 16px;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+  }
+  
+  .back-button,
+  .print-button {
+    padding: 10px;
+    margin-right: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .back-button:hover{
+    background-color: #5dc760;
+  }
+  
+  .print-button {
+    background-color: #0c7997;
+  }
+
+  .print-button:hover {
+    background-color: #007bff;
   }
   
