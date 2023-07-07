@@ -83,7 +83,7 @@ const Reports = () => {
           <DatePicker
             selected={endDate}
             onChange={(date) => setEndDate(date)}
-            minDate={startDate}
+            minDate={startDate && new Date(new Date(startDate).setDate(startDate.getDate() + 1))}
             dateFormat="yyyy-MM-dd"
             className="date-picker-input"
           />
