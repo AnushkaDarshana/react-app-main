@@ -48,7 +48,7 @@ const LoginForm = () => {
     </label>
     <input type="submit" value="Login" className='submit-button' />
     <p className='form-link'>
-      Create new account? <a href="/">Register</a>
+      Create new account? <a href="/register">Register</a>
     </p>
   </form>
 </div>

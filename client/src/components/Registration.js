@@ -15,7 +15,7 @@ function RegistrationForm() {
     axios
       .post('http://localhost:8080/routes/register', { username, password })
       .then((response) => {
-        navigate('/login');
+        navigate('/');
       })
       .catch((error) => {
         console.error('Error:', error);
